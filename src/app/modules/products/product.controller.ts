@@ -43,7 +43,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const productControllers = {
+export const ProductControllers = {
   createProduct,
   getAllProducts,
   getSingleProduct,

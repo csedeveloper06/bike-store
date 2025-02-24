@@ -1,9 +1,9 @@
 import express from 'express';
-import { productControllers } from './product.controller';
+import { ProductControllers } from './product.controller';
 
 const router = express.Router();
-router.post('/create-product', productControllers.createProduct);
-router.get('/', productControllers.getAllProducts);
-router.get('/:bikeId', productControllers.getSingleProduct);
+router.post('/create-product', ProductControllers.createProduct);
+router.get('/', ProductControllers.getAllProducts);
+router.get('/:bikeId', ProductControllers.getSingleProduct);
 
-export const productRoutes = router;
+export const ProductRoutes = router;
