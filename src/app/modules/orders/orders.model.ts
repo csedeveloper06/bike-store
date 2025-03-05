@@ -24,39 +24,44 @@ const customerAddressSchema = new Schema<TCustomerAddress>({
   },
 });
 
-const orderSchema = new Schema<TOrder>({
-  user: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'User',
+const orderSchema = new Schema<TOrder>(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+    product: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Product',
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    orderDate: {
+      type: Date,
+      default: Date.now(),
+    },
+    deliveryDate: {
+      type: Date,
+      default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    },
+    orderStatus: {
+      type: String,
+      enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
+      default: 'Pending',
+    },
+    customerAddress: customerAddressSchema,
   },
-  product: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Product',
+  {
+    timestamps: true,
   },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  totalPrice: {
-    type: Number,
-    required: true,
-  },
-  orderDate: {
-    type: Date,
-    default: Date.now(),
-  },
-  deliveryDate: {
-    type: Date,
-    default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-  },
-  orderStatus: {
-    type: String,
-    enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
-    default: 'Pending',
-  },
-  customerAddress: customerAddressSchema,
-});
+);
 
 export const Order = model<TOrder>('Order', orderSchema);

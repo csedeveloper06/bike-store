@@ -12,4 +12,21 @@ const validateRequest = (schema: AnyZodObject) => {
   });
 };
 
+// const validateRequest =
+//   (schema: AnyZodObject) =>
+//   (req: Request, res: Response, next: NextFunction) => {
+//     try {
+//       console.log('🚀 Incoming Request Body:', req.body); // ✅ Log the request body
+
+//       schema.parse(req.body); // Validate using Zod
+//       next(); // If valid, proceed to the next middleware/controller
+//     } catch (error) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Validation Error',
+//         errors: error.errors,
+//       });
+//     }
+//   };
+
 export default validateRequest;
