@@ -16,6 +16,8 @@ router.post(
 
 router.get('/', OrderControllers.getAllOrders);
 
+router.get('/revenue', OrderControllers.getTotalRevenue);
+
 router.get('/:orderId', OrderControllers.getSingleOrder);
 
 router.put('/:orderId', OrderControllers.updateOrder);

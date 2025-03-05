@@ -29,10 +29,24 @@ const deleteOrderFromDB = async (id: string) => {
   return result;
 };
 
+const totalRevenueFromOrders = async () => {
+  const result = await Order.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalRevenue: { $sum: { $multiply: ['$totalPrice', '$quantity'] } },
+      },
+    },
+  ]);
+  const totalRevenue = result.length > 0 ? result[0].totalRevenue : 0;
+  return totalRevenue;
+};
+
 export const OrderServices = {
   getAllOrdersFromDB,
   getSingleOrderFromDB,
   createOrderIntoDB,
   updateOrderIntoDB,
   deleteOrderFromDB,
+  totalRevenueFromOrders,
 };
