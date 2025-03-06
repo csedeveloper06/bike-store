@@ -24,6 +24,7 @@ const getAllOrders = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const getTotalRevenue = catchAsync(async (req, res) => {
   const result = await OrderServices.totalRevenueFromOrders();
   sendResponse(res, {
@@ -33,6 +34,7 @@ const getTotalRevenue = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const getSingleOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   const result = await OrderServices.getSingleOrderFromDB(orderId);
@@ -43,6 +45,7 @@ const getSingleOrder = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const updateOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   const updatedData = req.body;
@@ -54,6 +57,7 @@ const updateOrder = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const deleteOrder = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   const result = await OrderServices.deleteOrderFromDB(orderId);
