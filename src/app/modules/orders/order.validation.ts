@@ -8,6 +8,14 @@ const customerAddressValidationSchema = z.object({
   city: z.string(),
 });
 
+const updateCustomerAddressValidationSchema = z.object({
+  roadNo: z.string().optional(),
+  blockNo: z.string().optional(),
+  buildingNo: z.string().optional(),
+  area: z.string().optional(),
+  city: z.string().optional(),
+});
+
 export const createOrderValidationSchema = z.object({
   body: z.object({
     user: z.string(),
@@ -20,7 +28,20 @@ export const createOrderValidationSchema = z.object({
     customerAddress: customerAddressValidationSchema,
   }),
 });
+export const updateOrderValidationSchema = z.object({
+  body: z.object({
+    user: z.string().optional(),
+    product: z.string().optional(),
+    quantity: z.number().optional(),
+    totalPrice: z.number().optional(),
+    orderDate: z.string().date().optional(),
+    deliveryDate: z.string().date().optional(),
+    orderStatus: z.string().optional(),
+    customerAddress: updateCustomerAddressValidationSchema,
+  }),
+});
 
 export const OrderValidation = {
   createOrderValidationSchema,
+  updateCustomerAddressValidationSchema,
 };

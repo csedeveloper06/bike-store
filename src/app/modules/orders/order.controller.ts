@@ -5,9 +5,8 @@ import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 
 const createOrder = catchAsync(async (req, res) => {
-  console.log('📦 Request Body in Controller:', req.body);
-  //   const { payload } = req.body;
-  const result = await OrderServices.createOrderIntoDB(req.body);
+  const { product } = req.body;
+  const result = await OrderServices.createOrderIntoDB(product, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
