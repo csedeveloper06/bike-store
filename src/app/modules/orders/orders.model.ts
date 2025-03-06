@@ -1,5 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { TCustomerAddress, TOrder } from './orders.interface';
+import { Product } from '../products/products.model';
+import AppError from '../../errors/AppError';
+import httpStatus from 'http-status';
 
 const customerAddressSchema = new Schema<TCustomerAddress>({
   roadNo: {
@@ -42,7 +45,7 @@ const orderSchema = new Schema<TOrder>(
     },
     totalPrice: {
       type: Number,
-      required: true,
+      default: 0,
     },
     orderDate: {
       type: Date,
@@ -63,5 +66,19 @@ const orderSchema = new Schema<TOrder>(
     timestamps: true,
   },
 );
+
+orderSchema.pre('save', async function (next) {
+  if (!this.isModified('product') && !this.isModified('quantity')) {
+    return next();
+  }
+
+  const product = await Product.findById(this.product);
+  if (!product) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product not found');
+  }
+
+  this.totalPrice = product?.price * this.quantity;
+  next();
+});
 
 export const Order = model<TOrder>('Order', orderSchema);

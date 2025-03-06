@@ -21,7 +21,7 @@ export const createOrderValidationSchema = z.object({
     user: z.string(),
     product: z.string(),
     quantity: z.number(),
-    totalPrice: z.number(),
+    // totalPrice: z.number(),
     orderDate: z.string().date(),
     deliveryDate: z.string().date(),
     orderStatus: z.string(),

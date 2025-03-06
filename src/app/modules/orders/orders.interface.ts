@@ -12,7 +12,7 @@ export type TOrder = {
   user: Types.ObjectId;
   product: Types.ObjectId;
   quantity: number;
-  totalPrice: number;
+  totalPrice?: number;
   orderDate: Date;
   deliveryDate: Date;
   orderStatus: 'Pending' | 'Shipped' | 'Delivered' | 'Cancelled';
