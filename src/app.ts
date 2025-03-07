@@ -27,9 +27,11 @@ const getAController = (req: Request, res: Response) => {
 
 app.get('/', getAController);
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  globalErrorHandler(err, req, res, next);
-});
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+//   globalErrorHandler(err, req, res, next);
+// });
+
+app.use(globalErrorHandler);
 
 //Not Found
 app.use(notFound);
