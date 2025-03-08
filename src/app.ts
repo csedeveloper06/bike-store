@@ -20,7 +20,7 @@ app.use(cors({ origin: ['http://localhost:5173'] }));
 // application routes
 app.use('/api', router);
 
-const getAController = (req: Request, res: Response) => {
+const getAController = async (req: Request, res: Response) => {
   const a = 10;
   res.send(a);
 };
