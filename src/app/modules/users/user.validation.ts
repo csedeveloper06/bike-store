@@ -16,7 +16,7 @@ export const createUserValidationSchema = z.object({
   body: z.object({
     user: z.object({
       name: userNameSchema,
-      email: z.string().email(),
+      email: z.string().email({ message: 'Invalid email address' }),
       password: z
         .string({
           invalid_type_error: 'Password must be string',
