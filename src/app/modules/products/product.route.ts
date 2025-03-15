@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
   '/create-product',
-  // validateRequest(productValidations.createProductValidationSchema),
+  validateRequest(productValidations.createProductValidationSchema),
   ProductControllers.createProduct,
 );
 router.get('/', ProductControllers.getAllProducts);
